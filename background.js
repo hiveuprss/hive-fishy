@@ -47,7 +47,7 @@ chrome.webNavigation.onBeforeNavigate.addListener(
     }
 
     let accountname = url.pathname.split('/')[1].replace('@','')
-    console.log(accountname)
+    console.log(`NAME: ${accountname}`)
     getVestingShares(accountname)
   },
   {url: [{hostEquals:'peakd.com'},
@@ -115,12 +115,10 @@ function getVestingShares(account_name) {
     .then(res => {
       let vestingshares = parseFloat(res['result'][0]['vesting_shares'])
       console.log(`VESTS: ${vestingshares}`)
-      
       let hivepower = convertVestsToHivePower(vestingshares)
-      console.log(hivepower)
       console.log(`HP: ${hivepower}`)
       let fishname = getFishName(hivepower)
-      console.log(fishname)
+      console.log(`FISH: ${fishname}`)
       updateBadge(fishname)
     })
 }

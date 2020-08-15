@@ -8,7 +8,6 @@
 
   "browser_action": {
     "default_title": "Hive Fishy",
-    "default_popup": "popup.html",
     "default_icon": {         
       "16": "assets/hive16.png",
       "24": "assets/hive24.png",
@@ -17,8 +16,7 @@
   },
 
   "background": {
-    "page": "background.html",
-    "persistent": true
+    "page": "background.html"
   },
 
   "permissions": [
