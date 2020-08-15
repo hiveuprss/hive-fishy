@@ -35,7 +35,7 @@ FISH_BADGE_TEXT = {
 }
 
 
-chrome.webNavigation.onBeforeNavigate.addListener(
+chrome.webNavigation.onHistoryStateUpdated.addListener(
   res => {
     let url = new URL(res['url'])
     
@@ -109,7 +109,6 @@ function updateBadge (fish_name) {
 }
 
 function getVestingShares(account_name) {
-  // get accounts
   hiveTx
     .call('condenser_api.get_accounts', [[account_name]])
     .then(res => {
