@@ -35,6 +35,28 @@ FISH_BADGE_TEXT = {
 }
 
 
+chrome.webNavigation.onBeforeNavigate.addListener(
+  res => {
+    let url = new URL(res['url'])
+    
+    // if it's not a user profile, reset
+    if (!url.pathname.includes('@')) {
+      console.log('Reset')
+      resetBadge()
+      return
+    }
+
+    let accountname = url.pathname.split('/')[1].replace('@','')
+    console.log(`NAME: ${accountname}`)
+    getVestingShares(accountname)
+  },
+  {url: [{hostEquals:'peakd.com'},
+         {hostEquals:'hive.blog'},
+         {hostEquals:'leofinance.io'},
+         {hostEquals:'ecency.com'}]})
+
+
+
 chrome.webNavigation.onHistoryStateUpdated.addListener(
   res => {
     let url = new URL(res['url'])
