@@ -12,5 +12,8 @@ Assets are free for commercial use and no attribution required. These are the so
 * Whale icon - https://pixabay.com/vectors/whale-fish-blue-marine-sea-life-297718/
 
 
+## Dependencies
+
 Relies on libary ***[hive-tx-js](https://github.com/mahdiyari/hive-tx-js)*** by [@mahdiyari](https://peakd.com/@mahdiyari)
 
+Uses Twitter's [Bootstrap](https://getbootstrap.com/) web UI library 

@@ -42,10 +42,12 @@ URL_FILTERS = {url: [{hostEquals:'peakd.com'},
 
 // Global state
 
-ACCOUNT_NAME = ''
+ACCOUNT_NAME = 'None'
 ACCOUNT_HIVE_POWER = ''
 ACCOUNT_FISH_NAME = ''
 
+
+// Chrome event listeners
 
 chrome.webNavigation.onBeforeNavigate.addListener(
   res => {
@@ -62,6 +64,13 @@ chrome.webNavigation.onHistoryStateUpdated.addListener(
   },
   URL_FILTERS)
 
+chrome.runtime.onMessage.addListener(
+  (request, sender, sendResponse) => {
+    if (request.greeting == "getInfo")
+      sendResponse({accountname: ACCOUNT_NAME, hivepower: ACCOUNT_HIVE_POWER, fishname: ACCOUNT_FISH_NAME});
+  });
+
+// helper functions
 
 function handleNavigation(url) {
   // if it's not a user profile, reset
@@ -102,6 +111,11 @@ function getFishName (hive_power) {
 }
 
 function resetBadge () {
+  ACCOUNT_NAME = 'None'
+  ACCOUNT_HIVE_POWER = ''
+  ACCOUNT_FISH_NAME = ''
+
+
   chrome.browserAction.setBadgeText(
     {text: DEFAULT_BADGE_TEXT}
   )
@@ -140,8 +154,13 @@ function getVestingShares(account_name) {
       let fishname = getFishName(hivepower)
       console.log(`FISH: ${fishname}`)
       updateBadge(fishname)
+
+      ACCOUNT_NAME = account_name
+      ACCOUNT_HIVE_POWER = hivepower
+      ACCOUNT_FISH_NAME = fishname
     })
 }
+
 
 
 
