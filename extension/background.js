@@ -9,8 +9,8 @@ DEFAULT_BADGE_COLOR = 'black'
 
 FISH_BADGE_ICONS = {
   'plankton': 'assets/plankton32.png',
-  'minnow':   'assets/minnow32.png',
   'redfish':  'assets/redfish32.png',
+  'minnow':   'assets/minnow32.png',
   'dolphin':  'assets/dolphin32.png',
   'orca':     'assets/orca32.png',
   'whale':    'assets/whale32.png'
@@ -18,8 +18,8 @@ FISH_BADGE_ICONS = {
 
 FISH_BADGE_COLORS = {
   'plankton': 'purple',
-  'minnow':   'silver',
   'redfish':  'red',
+  'minnow':   'silver',
   'dolphin':  'green',
   'orca':     'black',
   'whale':    'blue'
@@ -27,8 +27,8 @@ FISH_BADGE_COLORS = {
 
 FISH_BADGE_TEXT = {
   'plankton': 'P',
-  'minnow':   'M',
   'redfish':  'R',
+  'minnow':   'M',
   'dolphin':  'D',
   'orca':     'O',
   'whale':    'W'
@@ -102,9 +102,9 @@ function getFishName (hive_power) {
   } else if (hive_power > 5000){
     return 'dolphin'
   } else if (hive_power > 500){
-    return 'redfish'
-  } else if (hive_power > 100){
     return 'minnow'
+  } else if (hive_power > 100){
+    return 'redfish'
   } else {
     return 'plankton'
   }
