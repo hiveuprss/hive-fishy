@@ -34,34 +34,37 @@ FISH_BADGE_TEXT = {
   'whale':    'W'
 }
 
+URL_FILTERS = {url: [{hostEquals:'peakd.com'},
+         {hostEquals:'hive.blog'},
+         {hostEquals:'leofinance.io'},
+         {hostEquals:'ecency.com'}]}
+
+
+// Global state
+
+ACCOUNT_NAME = ''
+ACCOUNT_HIVE_POWER = ''
+ACCOUNT_FISH_NAME = ''
+
 
 chrome.webNavigation.onBeforeNavigate.addListener(
   res => {
     let url = new URL(res['url'])
-    
-    // if it's not a user profile, reset
-    if (!url.pathname.includes('@')) {
-      console.log('Reset')
-      resetBadge()
-      return
-    }
-
-    let accountname = url.pathname.split('/')[1].replace('@','')
-    console.log(`NAME: ${accountname}`)
-    getVestingShares(accountname)
+    handleNavigation(url)
   },
-  {url: [{hostEquals:'peakd.com'},
-         {hostEquals:'hive.blog'},
-         {hostEquals:'leofinance.io'},
-         {hostEquals:'ecency.com'}]})
-
+  URL_FILTERS)
 
 
 chrome.webNavigation.onHistoryStateUpdated.addListener(
   res => {
     let url = new URL(res['url'])
-    
-    // if it's not a user profile, reset
+    handleNavigation(url)
+  },
+  URL_FILTERS)
+
+
+function handleNavigation(url) {
+  // if it's not a user profile, reset
     if (!url.pathname.includes('@')) {
       console.log('Reset')
       resetBadge()
@@ -71,11 +74,7 @@ chrome.webNavigation.onHistoryStateUpdated.addListener(
     let accountname = url.pathname.split('/')[1].replace('@','')
     console.log(`NAME: ${accountname}`)
     getVestingShares(accountname)
-  },
-  {url: [{hostEquals:'peakd.com'},
-         {hostEquals:'hive.blog'},
-         {hostEquals:'leofinance.io'},
-         {hostEquals:'ecency.com'}]})
+}
 
 
 function convertVestsToHivePower(vesting_shares) {
