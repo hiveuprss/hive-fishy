@@ -80,7 +80,7 @@ function handleNavigation(url) {
       return
     }
 
-    let accountname = url.pathname.split('/')[1].replace('@','')
+    let accountname = url.pathname.split('@')[1].split('/')[0]
     console.log(`NAME: ${accountname}`)
     getVestingShares(accountname)
 }
